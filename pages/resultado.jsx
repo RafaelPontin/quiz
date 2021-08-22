@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import Estatistica from '../components/Estatistica.tsx';
 import Botao from '../components/Botao.tsx';
 
-export default function resultado(){
+export default function Resultado(){
 
     const router = useRouter();
 
