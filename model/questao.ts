@@ -4,14 +4,14 @@ import RespostaModel from "./resposta";
 export default class QuestaoModel{
     #id: number;
     #enunciado: string;
-    #respostas: RespostaModel[];
+    repostas: RespostaModel[];
     #acertou: boolean;
     //#respondida: boolean;
 
     constructor(id:number, enunciado:string, resposta: RespostaModel[], acertou:boolean = false) {
         this.#id= id;        
         this.#enunciado = enunciado;       
-        this.#respostas = resposta;        
+        this.repostas = resposta;        
         this.#acertou = acertou;        
     }
 
@@ -24,7 +24,7 @@ export default class QuestaoModel{
     } 
 
     get resposta(){
-        return this.#respostas;
+        return this.repostas;
     } 
     
     get acertou(){
@@ -37,15 +37,15 @@ export default class QuestaoModel{
 
     get respondida(){
 
-        for(let respota of this.#respostas){
+        for(let respota of this.repostas){
             if(respota.revelada) return true;
         }
         return false;
     } 
 
     responderCom(indice: number): QuestaoModel{
-        const acertou = this.#respostas[indice]?.certa;
-        const respostas = this.#respostas.map((resposta, i) => {
+        const acertou = this.repostas[indice]?.certa;
+        const respostas = this.repostas.map((resposta, i) => {
             const respostaSelecionada = indice === i;
             const deveRevelar = respostaSelecionada || resposta.certa;
             return respostaSelecionada ? resposta.revelar() : resposta;
@@ -55,12 +55,11 @@ export default class QuestaoModel{
     }
 
     embaralharRespostas(){
-        let respostasEmbaralhadas = embaralhar(this.#respostas);
+        let respostasEmbaralhadas = embaralhar(this.repostas);
         return new QuestaoModel(this.#id, this.#enunciado, respostasEmbaralhadas, this.#acertou);
     }
 
     static criarUsandoObjeto(obj: QuestaoModel) : QuestaoModel{
-
         const respostas = obj.repostas.map(resp => RespostaModel.criarUsandoObjeto(resp));
         return new QuestaoModel(obj.id, obj.enunciado, respostas, obj.acertou);
     }
@@ -71,7 +70,7 @@ export default class QuestaoModel{
              enunciado: this.#enunciado,
              respondida: this.respondida,
              acertou: this.#acertou,
-             repostas: this.#respostas.map(resp => resp.paraObjeto()),
+             repostas: this.repostas.map(resp => resp.paraObjeto()),
         }
     }
 }

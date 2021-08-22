@@ -37,7 +37,7 @@ export default class RespostaModel{
     }
 
     static criarUsandoObjeto(obj : RespostaModel) : RespostaModel{
-        return new RespostaModel(obj.valor, obj.acerta, obj.revelada)
+        return new RespostaModel(obj.valor, obj.certa, obj.revelada)
     }
 
 
