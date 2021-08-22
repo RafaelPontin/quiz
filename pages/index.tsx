@@ -70,13 +70,13 @@ export default function Home() {
   }
 
   function finalizar(){
-    router.push({
+   /*  router.push({
       pathname: '/resultado',
       query:{
         total: idsDasQuestoes.length,
         certas: respostasCertas
       }
-    });
+    }); */
   }
 
 
